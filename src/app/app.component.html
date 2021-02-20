@@ -1,0 +1,91 @@
+
+ <div class="container">
+    <!-- Toolbar -->
+    <mat-toolbar color="primary" class="header mt-2 p-1">
+      <span class="title-center ">Data Binding in Forms</span>
+    </mat-toolbar>
+
+    <br>
+    <form  [formGroup]="dataForm" >
+
+      <!--First Name-->
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label for="firstname">First Name:</label>
+          &nbsp;&nbsp;
+          <mat-form-field appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstname" required>
+          </mat-form-field>
+        </div>
+ 
+      <!--Last Name-->
+      <div class="form-group col-6">
+        <label for="lastname">Last Name:</label>
+        &nbsp;&nbsp;
+       <mat-form-field appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName='lastname' required>
+        </mat-form-field>
+      </div>
+  </div>
+  
+  <!--State-->
+   <div class="form-row">
+      <div class="form-group col-6">
+        <label >State:</label>
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <mat-form-field appearance="fill">
+          <mat-label>State</mat-label>
+          <mat-select formControlName="states">
+            <mat-option *ngFor="let state of states" [value]="state.sname">{{state.sname}} </mat-option> 
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!--District-->
+      <div class="form-group col-6">
+      <label for="district">District:</label>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <mat-form-field appearance="fill">
+        <mat-label>District</mat-label>
+        <mat-select  formControlName="districts">
+          <mat-option *ngFor="let district of districts " [value]="district.dname">{{district.dname}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>&nbsp;&nbsp;&nbsp;
+    <button mat-raised-button color="primary"  (click)="resetdataForm()">Cancel</button>
+  </div>
+  </form>
+</div>
+
+<!--Table to display submitted form values-->
+<div class="text-center container mt-5" *ngIf="dataSource">
+    <h3 class="bg-primary text-white p-1">Table With Submitted Form Data</h3>
+     <table class="table table-responsive-md btn-table border">
+      <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>State</th>
+        <th>District</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let d of dataSource">
+        <td>{{d.firstname}}</td>
+        <td>{{d.lastname}}</td>
+        <td>{{d.states}}</td>
+        <td>{{d.districts}}</td>
+
+      </tr>
+    </tbody>
+    </table>
+
+</div>
+
+
